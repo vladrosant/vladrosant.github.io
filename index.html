@@ -409,6 +409,7 @@
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#opensource">Open Source</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -690,6 +691,64 @@
   </div>
 </section>
 
+<!-- OPEN SOURCE -->
+<section id="opensource" style="background: var(--warm-white);">
+  <div class="section-label">Open Source</div>
+  <h2 class="section-title">Things I built for fun.</h2>
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; max-width: 1100px;">
+
+    <div class="skill-card reveal" style="border-left: 3px solid var(--teal);">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 0.8rem;">
+        <div class="skill-card-title" style="margin-bottom:0;">m8s</div>
+        <a href="https://github.com/vladrosant/m8s" target="_blank" style="font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--teal); text-decoration:none; letter-spacing:0.08em;">↗ github</a>
+      </div>
+      <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.7; margin-bottom:1rem;">
+        A minimal Kubernetes-like container orchestrator built from scratch in Go. Implements the core control plane components — API server, scheduler, kubelet, and a CLI — as a deep-dive into how container orchestration actually works under the hood.
+      </p>
+      <div class="skill-tags">
+        <span class="skill-tag highlight">Go</span>
+        <span class="skill-tag">Container Orchestration</span>
+        <span class="skill-tag">Systems Programming</span>
+        <span class="skill-tag">CLI</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal" style="border-left: 3px solid var(--teal);">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 0.8rem;">
+        <div class="skill-card-title" style="margin-bottom:0;">ass — Autonomous Spacecraft Safety</div>
+        <a href="https://github.com/vladrosant/ass" target="_blank" style="font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--teal); text-decoration:none; letter-spacing:0.08em;">↗ github</a>
+      </div>
+      <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.7; margin-bottom:1rem;">
+        A Python research prototype for autonomous space debris avoidance, combining computer vision and AI. Implements edge detection (Canny, LoG, Sobel), CNNs for debris classification, optical flow for trajectory prediction, and reinforcement learning for avoidance maneuver planning. Validated in Gazebo simulation.
+      </p>
+      <div class="skill-tags">
+        <span class="skill-tag highlight">Python</span>
+        <span class="skill-tag">CNNs / RNNs</span>
+        <span class="skill-tag">OpenCV</span>
+        <span class="skill-tag">TensorFlow</span>
+        <span class="skill-tag">Reinforcement Learning</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal" style="border-left: 3px solid var(--teal);">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 0.8rem;">
+        <div class="skill-card-title" style="margin-bottom:0;">poopy — CLI Expense Tracker</div>
+        <a href="https://github.com/vladrosant/poopy" target="_blank" style="font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--teal); text-decoration:none; letter-spacing:0.08em;">↗ github</a>
+      </div>
+      <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.7; margin-bottom:1rem;">
+        A no-nonsense command-line expense tracker in Go and Python. Stores data as JSON, lets you add, categorize, and summarize expenses without leaving your terminal. A practical tool built to scratch a personal itch and sharpen Go CLI patterns.
+      </p>
+      <div class="skill-tags">
+        <span class="skill-tag highlight">Go</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">CLI</span>
+        <span class="skill-tag">JSON</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-label">Contact</div>
@@ -701,7 +760,7 @@
     </p>
     <a href="mailto:psantana.business@gmail.com" class="btn btn-primary">psantana.business@gmail.com</a>
     <div class="contact-links">
-      <a href="https://linkedin.com/in/pedrohfsantana" class="contact-link" target="_blank">LinkedIn</a>
+      <a href="https://linkedin.com/in/pedrohfsantana/" class="contact-link" target="_blank">LinkedIn</a>
       <a href="https://github.com/vladrosant" class="contact-link" target="_blank">GitHub</a>
       <a href="tel:+5517981649372" class="contact-link">+55 17 98164-9372</a>
     </div>
