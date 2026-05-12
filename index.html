@@ -219,7 +219,6 @@
     line-height: 1.9;
     position: relative;
     white-space: pre;
-    overflow-x: auto;
   }
   .about-side::before {
     content: 'profile.yml';
@@ -456,7 +455,7 @@
       <span>Pedro Henrique Ferreira Santana</span>
       <a href="mailto:psantana.business@gmail.com">psantana.business@gmail.com</a>
       <a href="https://github.com/vladrosant">github.com/vladrosant</a>
-      <a href="https://linkedin.com/in/pedrohfsantana">linkedin.com/in/pedrohfsantana</a>
+      <a href="https://www.linkedin.com/in/pedrohfsantana/">linkedin.com/in/pedrohfsantana</a>
     </div>
     <div class="hero-mark">
       <span class="big">§</span>
@@ -483,7 +482,6 @@
         </p>
       </div>
       <aside class="about-side reveal">
-<span class="comment"># profile.yml</span>
 <span class="key">name</span>: <span class="str">Pedro Santana</span>
 <span class="key">role</span>: <span class="str">Software & Data Engineer</span>
 <span class="key">based_in</span>: <span class="str">Brazil (UTC-3)</span>
@@ -559,12 +557,12 @@
           <summary>Read the case study</summary>
           <div class="case-study">
             <div class="case-section">
-              <div class="case-label">Problem</div>
-              <p class="case-body">A small B2B SaaS team had three ad platforms, a HubSpot CRM, and a single overworked SQL analyst writing 800-line queries by hand for each weekly report. Schema changes in source connectors silently broke dashboards. Multi-client work meant copy-pasting the same query against different schemas.</p>
+              <div class="case-label">Why I built it</div>
+              <p class="case-body">I wanted a real, multi-source dbt project to learn against — not Jaffle Shop, not a one-table tutorial. B2B marketing data was the obvious target: three ad platforms (LinkedIn, Google, Meta), a CRM (HubSpot), and the joins between them are where the actual hard problems live. Multi-client structure was a self-imposed constraint to force me to think about macros and conventions early instead of bolting them on later.</p>
             </div>
             <div class="case-section">
               <div class="case-label">Approach</div>
-              <p class="case-body">Designed a three-layer dbt project (<code>staging → intermediate → marts</code>) with a per-client schema convention. Wrote macros to handle cross-tenant logic once, then parameterize per client at build time:</p>
+              <p class="case-body">Three-layer dbt project (<code>staging → intermediate → marts</code>) with a per-client schema convention. Macros handle cross-tenant logic once, parameterized at build time:</p>
 <div class="code-block"><span class="com">-- macros/union_client_sources.sql</span>
 <span class="kw">{% macro</span> <span class="fn">union_client_sources</span>(source_name, table_name) <span class="kw">%}</span>
   <span class="kw">{% set</span> clients = var(<span class="str">'clients'</span>) <span class="kw">%}</span>
@@ -582,7 +580,7 @@
               <ul class="case-body">
                 <li><strong>Incremental models</strong> on all fact tables with <code>merge</code> strategy and event-time-based <code>unique_key</code>.</li>
                 <li><strong>LinkedIn URN extraction</strong> macro that pulls campaign / creative / account IDs from URN strings (<code>urn:li:sponsoredCampaign:12345</code>) into clean numeric columns.</li>
-                <li><strong>Google Ads campaign-name parser</strong> with regex tokens for account, channel, audience, and geo — surfaced as columns the marketing team can group on.</li>
+                <li><strong>Google Ads campaign-name parser</strong> with regex tokens for account, channel, audience, and geo — surfaced as queryable columns instead of leaving them buried in one long name string.</li>
                 <li><strong>dbt_utils / dbt_expectations</strong> for referential integrity between deals, contacts, and ad-touchpoint marts.</li>
                 <li><strong>GitHub Actions CI</strong> with slim CI (<code>--select state:modified+</code>) so PRs only build affected models against a CI dataset.</li>
               </ul>
@@ -705,7 +703,7 @@
       &nbsp;·&nbsp;
       <a href="https://github.com/vladrosant">github.com/vladrosant</a>
       &nbsp;·&nbsp;
-      <a href="https://linkedin.com/in/pedrohfsantana">linkedin.com/in/pedrohfsantana</a>
+      <a href="https://www.linkedin.com/in/pedrohfsantana/">linkedin.com/in/pedrohfsantana</a>
     </div>
     <div style="margin-top: 28px; opacity: 0.5;">© 2026 · Pedro Santana · Built with care</div>
   </footer>
