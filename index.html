@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Pedro Santana — Analytics Engineer</title>
+<title>Pedro Santana, Backend Software Engineer</title>
+<meta name="description" content="Pedro Santana: backend software engineer working with Python, Ruby, Go, PostgreSQL, and AI agent tooling (MCP).">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -432,6 +433,67 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* ===== Experience ===== */
+  .exp-years {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 36px;
+    color: var(--gold);
+    line-height: 1.05;
+  }
+  .exp-list {
+    margin: 0 0 20px 22px;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    max-width: 720px;
+  }
+  .exp-list li { margin-bottom: 8px; }
+  .repo-link { color: var(--accent-2); text-decoration: none; }
+  .repo-link:hover { color: var(--accent); }
+
+  .about-grid > * { min-width: 0; }
+  .about-side { overflow-x: auto; }
+
+  /* ===== Smaller projects ===== */
+  .mini-head {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-top: 1px solid var(--rule);
+    padding-top: 40px;
+    margin-bottom: 20px;
+  }
+  .mini-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  @media (max-width: 720px) { .mini-grid { grid-template-columns: 1fr; } }
+  .mini {
+    background: var(--paper);
+    padding: 20px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: background 0.3s;
+  }
+  .mini:hover { background: var(--paper-warm); }
+  .mini-name {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .mini-desc { font-size: 15px; line-height: 1.55; color: var(--ink-soft); }
 </style>
 </head>
 <body>
@@ -440,16 +502,16 @@
 
   <!-- Meta bar -->
   <div class="meta-bar">
-    <div><span class="dot"></span>Available · Remote, US-aligned</div>
-    <div>Vol. 01 · Portfolio · 2026</div>
+    <div><span class="dot"></span>Open to remote roles · Brazil, UTC-3</div>
+    <div>Vol. 02 · Portfolio · 2026</div>
   </div>
 
   <!-- HERO -->
   <header class="hero">
-    <div class="hero-label">Software & Data Engineer · SQL · Python · dbt</div>
-    <h1>I build the <span class="em">layer</span><br>between raw data<br>and the dashboard.</h1>
+    <div class="hero-label">Backend Software Engineer · Go · Python · Ruby · AI tooling</div>
+    <h1>I build backends<br>that hold up in<br><span class="em">production</span>.</h1>
     <p class="hero-tagline">
-      Software engineer migrating into data. SQL + Python daily, dbt + BigQuery on personal and freelance work, plus the occasional MCP server when I want to make my own job easier.
+      Backend developer running Python and Ruby systems at a public hospital network, where a failed integration means a lab result that never reaches a patient. On the side I write Go and build tools for AI agents, including an open-source MCP server on PyPI.
     </p>
     <div class="hero-meta">
       <span>Pedro Henrique Ferreira Santana</span>
@@ -458,8 +520,8 @@
       <a href="https://www.linkedin.com/in/pedrohfsantana/">linkedin.com/in/pedrohfsantana</a>
     </div>
     <div class="hero-mark">
-      <span class="big">§</span>
-      portfolio · 2026<br>volume one
+      <span class="big">95%</span>
+      fewer export errors<br>in production
     </div>
   </header>
 
@@ -472,57 +534,103 @@
     <div class="about-grid">
       <div class="about-prose reveal">
         <p>
-          I started in full-stack web development and moved into data work because the interesting problems kept landing on the database side anyway. The last year and a half has been a slow migration toward the modern data stack: <strong>dbt, BigQuery, and the ingestion and visualization tools that sit around them</strong>.
+          I'm a software developer at <strong>Hospital de Base (FUNFARME)</strong> in São José do Rio Preto, Brazil. I own the integration and automation side of the Central Laboratory's information system, which serves <strong>22 partner municipalities</strong>. Most of my day is REST APIs, PostgreSQL pipelines, Linux servers, and figuring out why something failed by reading logs, data, and code until the cause is obvious.
         </p>
         <p>
-          What I care about: <strong>SQL that explains itself</strong>, models that the next person can actually read, and tests that catch the thing you didn't think to check. Dashboards that answer one question well instead of ten questions vaguely.
+          The result I'm proudest of: result-export errors went from <strong>132 a day to 5 to 7 a day</strong>, a reduction of over 95%. No rewrite, just patient debugging and fixing root causes one by one.
         </p>
         <p>
-          On the side, I build small tools to make my own work less tedious. The one I'm most proud of right now is a <strong>Model Context Protocol (MCP) server</strong> that lets Claude introspect a dbt project's manifest — answer questions about lineage, draft missing docs, summarize last night's test failures. It's been the most fun thing I've built this year.
+          Outside work I write <strong>Go</strong>. My biggest project is m8s, a Kubernetes-inspired container orchestrator built from scratch to understand how a control plane really works. I also build tools for AI agents: <strong>dbt-mcp-server</strong> is an open-source Model Context Protocol server that has picked up external contributors.
         </p>
       </div>
       <aside class="about-side reveal">
 <span class="key">name</span>: <span class="str">Pedro Santana</span>
-<span class="key">role</span>: <span class="str">Software & Data Engineer</span>
-<span class="key">based_in</span>: <span class="str">Brazil (UTC-3)</span>
-<span class="key">background</span>: <span class="str">full-stack web → data</span>
-<span class="key">moved_into_data</span>: <span class="str">~18 months ago</span>
+<span class="key">role</span>: <span class="str">Backend Software Engineer</span>
+<span class="key">based_in</span>: <span class="str">Brazil (UTC-3), remote</span>
+<span class="key">experience</span>: <span class="str">~2 years, hospital systems</span>
+<span class="key">degree</span>: <span class="str">B.Sc. Computer Science</span>
 <span class="key">daily_stack</span>:
-  - <span class="str">SQL (PostgreSQL, BigQuery)</span>
-  - <span class="str">Python</span>
-  - <span class="str">Git, Linux</span>
-<span class="key">currently_learning</span>:
-  - <span class="str">dbt (Core)</span>
-  - <span class="str">Looker Studio</span>
-  - <span class="str">Airbyte / Fivetran</span>
-<span class="key">on_the_side</span>: <span class="str">Claude / MCP tooling</span>
-<span class="key">enjoys</span>: <span class="str">writing macros, naming things well</span>
+  - <span class="str">Python, Ruby</span>
+  - <span class="str">PostgreSQL, SQL</span>
+  - <span class="str">Linux, Git, Bash</span>
+<span class="key">side_projects</span>:
+  - <span class="str">Go</span>
+  - <span class="str">MCP / Claude API</span>
+<span class="key">languages</span>:
+  - <span class="str">Portuguese (native)</span>
+  - <span class="str">English (C1+)</span>
+  - <span class="str">Spanish, Japanese</span>
       </aside>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-head reveal">
+      <span class="section-num">§ 02</span>
+      <h2 class="section-title">Where I <em>work</em>.</h2>
+    </div>
+
+    <div class="project reveal">
+      <div class="exp-years">2025<br>now</div>
+      <div>
+        <div class="project-tag">Hospital de Base · FUNFARME</div>
+        <h3 class="project-name">Software Developer</h3>
+        <ul class="exp-list">
+          <li>Own the LIS, Integration, and Automation modules of the Central Laboratory's Shift LIS system, supporting 22 partner municipalities.</li>
+          <li>Cut result-export errors from 132 per day to 5 to 7 per day by tracing failures through logs, database records, and integration code.</li>
+          <li>Build and maintain production backend systems in Python and Ruby: REST APIs, PostgreSQL pipelines, automated reporting, and data integrations across four hospital departments.</li>
+          <li>Administer the Linux servers behind these systems, with scheduled jobs for backups, reboots, and asset inventory; support lab equipment integrated with the LIS.</li>
+          <li>Introduced Go into internal tooling and own each tool end to end: design, implementation, documentation, and maintenance.</li>
+        </ul>
+        <div class="stack-pills">
+          <span class="pill">Python</span>
+          <span class="pill">Ruby</span>
+          <span class="pill">PostgreSQL</span>
+          <span class="pill">REST APIs</span>
+          <span class="pill">Linux</span>
+          <span class="pill">Go</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project reveal">
+      <div class="exp-years">2024<br>2025</div>
+      <div>
+        <div class="project-tag">Hospital Municipal Dr. Domingos Marcolino Braile · FUNFARME</div>
+        <h3 class="project-name">Software Developer (Internship)</h3>
+        <ul class="exp-list">
+          <li>Designed and shipped the hospital intranet (data model, REST API, deployment pipeline), used by 200+ staff, and handled its production incidents after launch.</li>
+          <li>Wrote Python ETL scripts consolidating five legacy systems into one database, working through schema inconsistencies and encoding edge cases.</li>
+          <li>Shipped the state's first AI-assisted outpatient intake system, cutting patient processing time by about 26%.</li>
+          <li>Ran sprint planning and retros for the 3-person internal tech team.</li>
+        </ul>
+      </div>
     </div>
   </section>
 
   <!-- SKILLS -->
   <section id="skills">
     <div class="section-head reveal">
-      <span class="section-num">§ 02</span>
+      <span class="section-num">§ 03</span>
       <h2 class="section-title">The <em>toolbox</em>.</h2>
     </div>
     <div class="skills-grid reveal">
       <div class="skill-block">
-        <div class="skill-cat">Daily</div>
-        <div class="skill-list"><strong>SQL</strong> (PostgreSQL at work, BigQuery in personal projects), <strong>Python</strong>, Git, Linux, Bash. The tools I actually open every day.</div>
+        <div class="skill-cat">Backend</div>
+        <div class="skill-list"><strong>Python, Ruby, Go, SQL</strong>. REST and GraphQL APIs, PostgreSQL, Redis, Ruby on Rails, net/http and Gin, CLI tooling with cobra. JSON everywhere.</div>
       </div>
       <div class="skill-block">
-        <div class="skill-cat">Data work</div>
-        <div class="skill-list"><strong>dbt Core</strong> with Jinja, macros, tests, sources, exposures. Looker Studio with calculated fields and blended sources. Ingestion via Google Cloud Functions; some Airbyte. Familiar with LinkedIn Ads, Google Ads, and HubSpot schemas from personal projects.</div>
+        <div class="skill-cat">Go, specifically</div>
+        <div class="skill-list"><strong>Goroutines, channels, select, context</strong> propagation and cancellation, sync primitives, error wrapping with errors.Is / errors.As, interfaces, idiomatic package layout, go test, golangci-lint.</div>
       </div>
       <div class="skill-block">
-        <div class="skill-cat">Web stack (background)</div>
-        <div class="skill-list"><strong>Ruby on Rails, React, Node, Docker</strong>, REST + GraphQL, CircleCI / GitHub Actions, Cypress / Minitest. Where I came from, still useful surprisingly often.</div>
+        <div class="skill-cat">Production &amp; infra</div>
+        <div class="skill-list"><strong>Linux</strong> server administration (daily), Docker, GitHub Actions, CircleCI, Make, Git. Kubernetes concepts from building m8s. AWS Cloud Practitioner and Azure Fundamentals certified.</div>
       </div>
       <div class="skill-block">
-        <div class="skill-cat">On the side</div>
-        <div class="skill-list"><strong>Claude API + MCP servers</strong> — built a small one for dbt project introspection. Prompt engineering for engineering workflows (doc generation, code review).</div>
+        <div class="skill-cat">AI tooling &amp; data</div>
+        <div class="skill-list"><strong>Model Context Protocol</strong> server design, Claude API, AI coding agents as a daily tool. ETL in Python, plus dbt and BigQuery on personal projects.</div>
       </div>
     </div>
   </section>
@@ -530,89 +638,72 @@
   <!-- PROJECTS -->
   <section id="projects">
     <div class="section-head reveal">
-      <span class="section-num">§ 03</span>
+      <span class="section-num">§ 04</span>
       <h2 class="section-title">Selected <em>work</em>.</h2>
     </div>
 
-    <!-- Project 1 -->
+    <!-- Project 1: m8s -->
     <div class="project reveal">
       <div class="project-num">01</div>
       <div>
-        <div class="project-tag">Multi-client dbt project · Personal</div>
-        <h3 class="project-name">ad-attribution-dbt</h3>
+        <div class="project-tag">Personal project · Go · <a class="repo-link" href="https://github.com/vladrosant/m8s">↗ github</a></div>
+        <h3 class="project-name">m8s</h3>
         <p class="project-summary">
-          A modular, multi-client dbt project on BigQuery that unifies LinkedIn Ads, Google Ads, and HubSpot data into a single attribution layer. Per-client schemas isolated via dbt vars, cross-tenant logic encapsulated in macros.
+          A Kubernetes-inspired container orchestrator written from scratch in Go, with no framework scaffolding. An API server takes desired state over HTTP, a scheduler assigns workloads to nodes, and a kubelet-style loop reconciles what's running with what should be running.
         </p>
         <div class="stack-pills">
-          <span class="pill">dbt Core</span>
-          <span class="pill">BigQuery</span>
-          <span class="pill">LinkedIn Ads</span>
-          <span class="pill">Google Ads</span>
-          <span class="pill">HubSpot</span>
-          <span class="pill">Looker Studio</span>
-          <span class="pill">GitHub Actions</span>
-          <span class="pill">Jinja</span>
+          <span class="pill">Go</span>
+          <span class="pill">Concurrency</span>
+          <span class="pill">Containers</span>
+          <span class="pill">net/http</span>
+          <span class="pill">Make</span>
         </div>
         <details>
           <summary>Read the case study</summary>
           <div class="case-study">
             <div class="case-section">
               <div class="case-label">Why I built it</div>
-              <p class="case-body">I wanted a real, multi-source dbt project to learn against — not Jaffle Shop, not a one-table tutorial. B2B marketing data was the obvious target: three ad platforms (LinkedIn, Google, Meta), a CRM (HubSpot), and the joins between them are where the actual hard problems live. Multi-client structure was a self-imposed constraint to force me to think about macros and conventions early instead of bolting them on later.</p>
+              <p class="case-body">I wanted to understand what actually happens between <code>kubectl apply</code> and a running container, and to learn Go properly on a problem where concurrency isn't optional. Reading about control loops is easy; writing one that shuts down cleanly is not.</p>
             </div>
             <div class="case-section">
-              <div class="case-label">Approach</div>
-              <p class="case-body">Three-layer dbt project (<code>staging → intermediate → marts</code>) with a per-client schema convention. Macros handle cross-tenant logic once, parameterized at build time:</p>
-<div class="code-block"><span class="com">-- macros/union_client_sources.sql</span>
-<span class="kw">{% macro</span> <span class="fn">union_client_sources</span>(source_name, table_name) <span class="kw">%}</span>
-  <span class="kw">{% set</span> clients = var(<span class="str">'clients'</span>) <span class="kw">%}</span>
-  <span class="kw">{% for</span> client <span class="kw">in</span> clients <span class="kw">%}</span>
-    <span class="kw">select</span>
-      <span class="str">'{{ client }}'</span> <span class="kw">as</span> client_id,
-      *
-    <span class="kw">from</span> <span class="kw">{{</span> source(source_name ~ <span class="str">'_'</span> ~ client, table_name) <span class="kw">}}</span>
-    <span class="kw">{% if not</span> loop.last <span class="kw">%} union all {% endif %}</span>
-  <span class="kw">{% endfor %}</span>
-<span class="kw">{% endmacro %}</span></div>
-            </div>
-            <div class="case-section">
-              <div class="case-label">Tech decisions</div>
-              <ul class="case-body">
-                <li><strong>Incremental models</strong> on all fact tables with <code>merge</code> strategy and event-time-based <code>unique_key</code>.</li>
-                <li><strong>LinkedIn URN extraction</strong> macro that pulls campaign / creative / account IDs from URN strings (<code>urn:li:sponsoredCampaign:12345</code>) into clean numeric columns.</li>
-                <li><strong>Google Ads campaign-name parser</strong> with regex tokens for account, channel, audience, and geo — surfaced as queryable columns instead of leaving them buried in one long name string.</li>
-                <li><strong>dbt_utils / dbt_expectations</strong> for referential integrity between deals, contacts, and ad-touchpoint marts.</li>
-                <li><strong>GitHub Actions CI</strong> with slim CI (<code>--select state:modified+</code>) so PRs only build affected models against a CI dataset.</li>
-              </ul>
-            </div>
-            <div class="case-section">
-              <div class="case-label">Outcome</div>
-              <p class="case-body">A working three-layer project with macros that get reused, mart-layer tests that catch the things I would have missed, and column-level docs. Onboarding a new client means adding a row to <code>vars</code> instead of forking the project — which was the whole point.</p>
+              <div class="case-label">Architecture</div>
+              <p class="case-body">Three components, coordinated through channels and a shared context so a single cancel stops everything in order:</p>
+<div class="code-block"><span class="com">// cmd/ + pkg/ layout, Makefile-driven build</span>
+<span class="fn">apiserver</span>   <span class="com">// accepts desired state over HTTP</span>
+<span class="fn">scheduler</span>   <span class="com">// assigns workloads to nodes, one goroutine per decision</span>
+<span class="fn">kubelet</span>     <span class="com">// reconcile loop: actual vs desired container state</span>
+
+<span class="kw">select</span> {
+<span class="kw">case</span> <span class="kw">&lt;-</span>ctx.Done():
+    <span class="kw">return</span> ctx.Err()
+<span class="kw">case</span> spec <span class="kw">:=</span> <span class="kw">&lt;-</span>desired:
+    reconcile(ctx, spec)
+}</div>
             </div>
             <div class="case-section">
               <div class="case-label">Lessons</div>
-              <p class="case-body">Multi-tenant dbt rewards investing early in conventions: schema names, macro signatures, and source naming. Slim CI was the single biggest unlock for review speed once the project crossed ~30 models.</p>
+              <p class="case-body">Context propagation is the backbone, not an afterthought: every component that can block needs a way out. Wrapping errors with enough context to know which component failed made debugging the reconcile loop far easier, the same discipline I apply to production Python at work.</p>
             </div>
           </div>
         </details>
       </div>
     </div>
 
-    <!-- Project 2 -->
+    <!-- Project 2: dbt-mcp-server -->
     <div class="project reveal">
       <div class="project-num">02</div>
       <div>
-        <div class="project-tag">Open source · Claude / MCP</div>
+        <div class="project-tag">Open source · PyPI · Claude / MCP · <a class="repo-link" href="https://github.com/vladrosant/dbt-mcp-server">↗ github</a></div>
         <h3 class="project-name">dbt-mcp-server</h3>
         <p class="project-summary">
-          A Model Context Protocol server that exposes a dbt project's manifest, lineage graph, and test results to Claude — letting analysts ask plain-English questions about model dependencies, downstream impact, and missing documentation.
+          A Model Context Protocol server that exposes a dbt project's manifest, lineage graph, and test results to Claude, so analysts can ask plain-English questions about dependencies, downstream impact, and missing documentation. Published on PyPI, with external contributors.
         </p>
         <div class="stack-pills">
           <span class="pill">Python</span>
           <span class="pill">MCP</span>
           <span class="pill">Claude API</span>
           <span class="pill">dbt manifest.json</span>
-          <span class="pill">FastAPI</span>
+          <span class="pill">PyPI</span>
         </div>
         <details>
           <summary>Read the case study</summary>
@@ -635,33 +726,29 @@
             <div class="case-section">
               <div class="case-label">Tech decisions</div>
               <ul class="case-body">
-                <li>Stateless server — reads <code>target/manifest.json</code> on each tool call so it always reflects the latest <code>dbt parse</code>.</li>
+                <li>Stateless server: reads <code>target/manifest.json</code> on each tool call so it always reflects the latest <code>dbt parse</code>.</li>
                 <li><strong>Lineage as a graph</strong>: parsed once into NetworkX, exposed via subgraph queries.</li>
                 <li><strong>Doc suggestions</strong> use Claude itself: server reads a model's compiled SQL, sends it back through the API with a prompt template, returns YAML-ready doc blocks the user can paste into <code>schema.yml</code>.</li>
                 <li>Auth-less local mode for solo devs; HTTP+token mode for team use against a shared dbt project repo.</li>
               </ul>
             </div>
             <div class="case-section">
-              <div class="case-label">Outcome</div>
-              <p class="case-body">I use it on my own dbt project. Auto-drafting first-pass column docs from compiled SQL has been the biggest win — it's the difference between writing them and not bothering. Lineage questions that took me five minutes of clicking through dbt docs now take five seconds of typing.</p>
-            </div>
-            <div class="case-section">
               <div class="case-label">Lessons</div>
-              <p class="case-body">MCP rewards small, sharp tools. The first version had one giant <code>introspect_dbt</code> tool — it was useless. Splitting it into six narrow tools made Claude's tool selection reliable and the responses crisper.</p>
+              <p class="case-body">MCP rewards small, sharp tools. The first version had one giant <code>introspect_dbt</code> tool, and it was useless. Splitting it into six narrow tools made Claude's tool selection reliable and the responses crisper. Designing for an agent as the API consumer turned out to be its own discipline.</p>
             </div>
           </div>
         </details>
       </div>
     </div>
 
-    <!-- Project 3 -->
+    <!-- Project 3: communa -->
     <div class="project reveal">
       <div class="project-num">03</div>
       <div>
-        <div class="project-tag">Older personal project · Web</div>
-        <h3 class="project-name">rails-community-tracker</h3>
+        <div class="project-tag">Personal project · Full stack · <a class="repo-link" href="https://github.com/vladrosant/communa">↗ github</a></div>
+        <h3 class="project-name">communa</h3>
         <p class="project-summary">
-          A community impact tracker built on Rails with a GraphQL API, React frontend, Redis caching, and full Minitest coverage. Older project, not data-stack, but it's where I still go when I want to learn a new tool against something I already understand.
+          A community impact tracker: Rails GraphQL API, React frontend, Redis caching, full Minitest coverage, Docker, and a CircleCI pipeline with zero-downtime deploys. My most production-shaped personal project.
         </p>
         <div class="stack-pills">
           <span class="pill">Ruby on Rails</span>
@@ -677,13 +764,13 @@
           <div class="case-study">
             <div class="case-section">
               <div class="case-label">Why this is on the page</div>
-              <p class="case-body">It's the project where I first got serious about test coverage, containerization, and CI — the engineering habits that make my data work less chaotic now. The skills transferred better than I expected: GraphQL schemas and dbt sources have more in common than they should, and the muscle memory of "write the test before you trust the code" is the single most useful thing I brought from web work into data.</p>
+              <p class="case-body">It's the project where I got serious about test coverage, containerization, and CI. The habit of writing the test before trusting the code is the most useful thing I carry into every other project.</p>
             </div>
             <div class="case-section">
               <div class="case-label">What's in it</div>
               <ul class="case-body">
                 <li>Rails GraphQL API backend with a React frontend and Redis caching for the dashboard queries that hit hardest.</li>
-                <li>Full Minitest suite — model, controller, and integration tests — kept honest with a coverage gate in CI.</li>
+                <li>Full Minitest suite (model, controller, and integration tests) kept honest with a coverage gate in CI.</li>
                 <li>Docker + CircleCI pipeline doing zero-downtime deploys on every merge to <code>main</code>.</li>
                 <li>Role-based access control and audit logging, modeled after compliance patterns in regulated SaaS.</li>
               </ul>
@@ -693,11 +780,81 @@
       </div>
     </div>
 
+    <!-- Project 4: ad-attribution-dbt -->
+    <div class="project reveal">
+      <div class="project-num">04</div>
+      <div>
+        <div class="project-tag">Personal project · Data</div>
+        <h3 class="project-name">ad-attribution-dbt</h3>
+        <p class="project-summary">
+          A modular, multi-client dbt project on BigQuery that unifies LinkedIn Ads, Google Ads, and HubSpot data into a single attribution layer. Per-client schemas isolated via dbt vars, cross-tenant logic encapsulated in macros.
+        </p>
+        <div class="stack-pills">
+          <span class="pill">dbt Core</span>
+          <span class="pill">BigQuery</span>
+          <span class="pill">Jinja</span>
+          <span class="pill">GitHub Actions</span>
+          <span class="pill">Looker Studio</span>
+        </div>
+        <details>
+          <summary>Read the case study</summary>
+          <div class="case-study">
+            <div class="case-section">
+              <div class="case-label">Why I built it</div>
+              <p class="case-body">I wanted a real, multi-source dbt project to learn against, not Jaffle Shop or a one-table tutorial. B2B marketing data was the obvious target: ad platforms, a CRM (HubSpot), and the joins between them are where the actual hard problems live. Multi-client structure was a self-imposed constraint to force me to think about macros and conventions early.</p>
+            </div>
+            <div class="case-section">
+              <div class="case-label">Approach</div>
+              <p class="case-body">Three-layer dbt project (<code>staging → intermediate → marts</code>) with a per-client schema convention. Macros handle cross-tenant logic once, parameterized at build time:</p>
+<div class="code-block"><span class="com">-- macros/union_client_sources.sql</span>
+<span class="kw">{% macro</span> <span class="fn">union_client_sources</span>(source_name, table_name) <span class="kw">%}</span>
+  <span class="kw">{% set</span> clients = var(<span class="str">'clients'</span>) <span class="kw">%}</span>
+  <span class="kw">{% for</span> client <span class="kw">in</span> clients <span class="kw">%}</span>
+    <span class="kw">select</span>
+      <span class="str">'{{ client }}'</span> <span class="kw">as</span> client_id,
+      *
+    <span class="kw">from</span> <span class="kw">{{</span> source(source_name ~ <span class="str">'_'</span> ~ client, table_name) <span class="kw">}}</span>
+    <span class="kw">{% if not</span> loop.last <span class="kw">%} union all {% endif %}</span>
+  <span class="kw">{% endfor %}</span>
+<span class="kw">{% endmacro %}</span></div>
+            </div>
+            <div class="case-section">
+              <div class="case-label">Tech decisions</div>
+              <ul class="case-body">
+                <li><strong>Incremental models</strong> on all fact tables with <code>merge</code> strategy and event-time-based <code>unique_key</code>.</li>
+                <li><strong>LinkedIn URN extraction</strong> macro that pulls campaign / creative / account IDs from URN strings (<code>urn:li:sponsoredCampaign:12345</code>) into clean numeric columns.</li>
+                <li><strong>Google Ads campaign-name parser</strong> with regex tokens for account, channel, audience, and geo, surfaced as queryable columns instead of buried in one long name string.</li>
+                <li><strong>dbt_utils / dbt_expectations</strong> for referential integrity between deals, contacts, and ad-touchpoint marts.</li>
+                <li><strong>GitHub Actions CI</strong> with slim CI (<code>--select state:modified+</code>) so PRs only build affected models against a CI dataset.</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- Smaller things -->
+    <div class="mini-head reveal">Smaller things I built for fun</div>
+    <div class="mini-grid reveal">
+      <a class="mini" href="https://github.com/vladrosant/poopy">
+        <span class="mini-name">poopy</span>
+        <span class="mini-desc">CLI expense tracker in Go: subcommand routing, JSON storage, formatted table output.</span>
+      </a>
+      <a class="mini" href="https://github.com/vladrosant/ass">
+        <span class="mini-name">ass</span>
+        <span class="mini-desc">Python prototype for autonomous object-avoidance navigation, mixing computer vision and AI.</span>
+      </a>
+      <a class="mini" href="https://github.com/vladrosant/group-chat">
+        <span class="mini-name">group-chat</span>
+        <span class="mini-desc">TCP socket group messenger in Java, my first look at networking below HTTP.</span>
+      </a>
+    </div>
+
   </section>
 
   <!-- FOOTER -->
-  <footer>
-    <div class="big">Want to talk about <em>data models</em>?</div>
+  <footer id="contact">
+    <div class="big">Hiring for <em>backend</em> work? Let's talk.</div>
     <div>
       <a href="mailto:psantana.business@gmail.com">psantana.business@gmail.com</a>
       &nbsp;·&nbsp;
