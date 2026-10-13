@@ -276,6 +276,21 @@
   .btn.gold { border-color: var(--gold); color: var(--gold); background: rgba(245,196,81,0.06); }
   .btn.gold:hover { background: var(--gold); color: var(--bg); }
 
+  .d-label small { font-family: var(--mono); font-weight: 400; font-size: 11px; letter-spacing: .08em; color: var(--muted); margin-left: 8px; }
+  .entry-audio { display: block; width: 100%; max-width: 760px; height: 36px; margin-bottom: 10px; }
+  .entries { list-style: none; max-width: 760px; max-height: 320px; overflow-y: auto; border: 1px solid var(--line); }
+  .entry { display: grid; grid-template-columns: 1fr 44px; border-bottom: 1px dashed var(--line); }
+  .entry:last-child { border-bottom: 0; }
+  .entry-play { display: flex; align-items: center; gap: 12px; text-align: left; padding: 9px 14px; font-family: var(--mono); font-size: 13.5px; color: var(--text); transition: background .15s; }
+  .entry-play::before { content: '▶'; font-size: 10px; color: var(--accent); }
+  .entry-play:hover, .entry-mark:hover { background: rgba(255,255,255,0.04); }
+  .entry.playing .entry-play { background: rgba(94,234,212,0.08); color: var(--accent); }
+  .entry.playing .entry-play::before { content: '♪'; font-size: 13px; }
+  .entry.heard .entry-play { color: var(--muted); }
+  .entry-mark { display: grid; place-items: center; border-left: 1px dashed var(--line); color: var(--accent); font-size: 13px; }
+  .entry-mark::before { content: '◇'; color: var(--muted); }
+  .entry.heard .entry-mark::before { content: '✔'; color: var(--accent); }
+
   /* ===== Perks ===== */
   .perks-split { grid-template-columns: 1fr 400px; }
   @media (max-width: 900px) { .perks-split { grid-template-columns: 1fr; } }
@@ -606,6 +621,7 @@ const ICONS = {
   chat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>',
   star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg>',
   lock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>',
+  tape: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="12" rx="1"/><circle cx="8.5" cy="12" r="2"/><circle cx="15.5" cy="12" r="2"/><path d="M8.5 14h7"/></svg>',
   badge: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg>',
 };
 
@@ -631,6 +647,9 @@ const ITEMS = [
   { id: 'chat', name: 'group-chat', rarity: 'common', icon: 'chat', type: 'Java · networking',
     text: 'A group messenger over TCP sockets in Java. My first look at networking below HTTP.',
     stack: ['Java', 'TCP sockets'], repo: 'https://github.com/vladrosant/group-chat' },
+  { id: 'diario', name: 'diario', rarity: 'common', icon: 'tape', type: 'Audio log · personal',
+    text: "An audio diary. Nothing to do with the résumé, just something I wanted to keep here. Pick an entry to play it; the ones you finish get checked off.",
+    entries: 65, dir: 'diario' },
 ];
 
 const PERKS = [
@@ -835,15 +854,48 @@ function selectItem(i, silent) {
       <div class="d-title" style="font-family:var(--mono);font-size:clamp(22px,2.6vw,30px)">${esc(it.name)}</div></div>
     </div>
     <p class="d-text">${esc(it.text)}</p>
-    <div class="d-label">Stats</div>
-    <div class="chips">${it.stack.map(s => `<span class="chip">${esc(s)}</span>`).join('')}</div>
+    ${it.stack ? `<div class="d-label">Stats</div>
+    <div class="chips">${it.stack.map(s => `<span class="chip">${esc(s)}</span>`).join('')}</div>` : ''}
+    ${it.entries ? `<div class="d-label">Entries <small id="heard-count"></small></div>
+    <audio class="entry-audio" id="entry-audio" controls preload="none"></audio>
+    <ul class="entries" id="entries"></ul>` : ''}
     <div class="actions">
       ${it.cs ? `<button class="btn gold" id="inspect"><span class="key">↵</span>Inspect</button>` : ''}
       ${it.repo ? `<a class="btn" href="${it.repo}" target="_blank" rel="noopener">Open repo ↗</a>` : ''}
     </div>`;
   const ins = $('#inspect'); if (ins) ins.addEventListener('click', () => openCase(it));
+  if (it.entries) renderEntries(it);
   if (!silent) toDetail('#inv-detail');
   if (!silent) blip(it.rarity === 'legendary' ? 980 : it.rarity === 'epic' ? 860 : 720, 0.05);
+}
+
+/* ================= DIARY ENTRIES ================= */
+const HEARD_KEY = 'diario-heard';
+function loadHeard() { try { return new Set(JSON.parse(localStorage.getItem(HEARD_KEY)) || []); } catch (e) { return new Set(); } }
+function saveHeard(set) { try { localStorage.setItem(HEARD_KEY, JSON.stringify([...set].sort())); } catch (e) {} }
+function renderEntries(it) {
+  const heard = loadHeard(), audio = $('#entry-audio'), list = $('#entries');
+  let playing = null;
+  list.innerHTML = Array.from({ length: it.entries }, (_, k) => String(k + 1).padStart(2, '0')).map(n => `<li class="entry" data-n="${n}">
+    <button class="entry-play">Entry ${n}</button>
+    <button class="entry-mark" role="checkbox" aria-label="Entry ${n} listened"></button></li>`).join('');
+  function sync() {
+    $$('.entry', list).forEach(li => {
+      const h = heard.has(li.dataset.n);
+      li.classList.toggle('heard', h); li.classList.toggle('playing', li.dataset.n === playing);
+      $('.entry-mark', li).setAttribute('aria-checked', h);
+    });
+    $('#heard-count').textContent = heard.size + ' / ' + it.entries + ' listened';
+  }
+  list.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    const n = b.closest('.entry').dataset.n;
+    if (b.classList.contains('entry-mark')) { heard.has(n) ? heard.delete(n) : heard.add(n); saveHeard(heard); }
+    else { playing = n; audio.src = it.dir + '/' + n + '.mp3'; audio.play().catch(() => {}); }
+    sync();
+  });
+  audio.addEventListener('ended', () => { if (playing) { heard.add(playing); saveHeard(heard); toast('Entry ' + playing + ' listened'); } playing = null; sync(); });
+  sync();
 }
 
 /* ================= PERKS ================= */
@@ -901,7 +953,7 @@ document.addEventListener('keydown', e => {
   if (current === 'quests' && arrows.includes(e.key)) {
     e.preventDefault(); const d = (e.key === 'ArrowUp' || e.key === 'ArrowLeft') ? -1 : 1;
     selectQuest((qSel + d + QUESTS.length) % QUESTS.length);
-  } else if (current === 'inventory' && arrows.includes(e.key)) {
+  } else if (current === 'inventory' && arrows.includes(e.key) && tag !== 'AUDIO') {
     e.preventDefault(); const cols = getComputedStyle($('#inv-grid')).gridTemplateColumns.split(' ').length;
     const d = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -cols, ArrowDown: cols }[e.key];
     const n = iSel + d; if (n >= 0 && n < ITEMS.length) selectItem(n);
