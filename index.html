@@ -647,9 +647,9 @@ const ITEMS = [
   { id: 'chat', name: 'group-chat', rarity: 'common', icon: 'chat', type: 'Java · networking',
     text: 'A group messenger over TCP sockets in Java. My first look at networking below HTTP.',
     stack: ['Java', 'TCP sockets'], repo: 'https://github.com/vladrosant/group-chat' },
-  { id: 'diario', name: 'diario', rarity: 'common', icon: 'tape', type: 'Audio log · personal',
-    text: "An audio diary. Nothing to do with the résumé, just something I wanted to keep here. Pick an entry to play it; the ones you finish get checked off.",
-    entries: 65, dir: 'diario' },
+  { id: 'secret-diary', name: 'secret-diary', rarity: 'common', icon: 'tape', type: 'Audio log · miscellaneous',
+    text: "A lost diary. The insides are unknown. The cover reads: LP's secret diary",
+    entries: 65, dir: 'secret-diary' },
 ];
 
 const PERKS = [
@@ -870,7 +870,7 @@ function selectItem(i, silent) {
 }
 
 /* ================= DIARY ENTRIES ================= */
-const HEARD_KEY = 'diario-heard';
+const HEARD_KEY = 'secret-diary-heard';
 function loadHeard() { try { return new Set(JSON.parse(localStorage.getItem(HEARD_KEY)) || []); } catch (e) { return new Set(); } }
 function saveHeard(set) { try { localStorage.setItem(HEARD_KEY, JSON.stringify([...set].sort())); } catch (e) {} }
 function renderEntries(it) {
